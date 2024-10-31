@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>My CDA Portfolio</title>
+</head>
+<body>
+    <div class="book">
+        <div class="page" id="page1">
+            <h1>Welcome to My CDA Portfolio!</h1>
+            <h2>Hi there! I'm [Your Name]</h2>
+            <h3>Date: [Current Date]</h3>
+            <p>Feel free to explore my journey in child development!</p>
+            <button onclick="flipPage('page1', 'page2')">Let's Go!</button>
+        </div>
+        <div class="page" id="page2">
+            <h1>Table of Contents</h1>
+            <ul>
+                <li>Introduction</li>
+                <li>My Philosophy</li>
+                <li>Competency Goals</li>
+                <li>Resources</li>
+                <li>Family Connections</li>
+                <li>Docs & Stuff</li>
+                <li>Wrap Up</li>
+                <li>References</li>
+            </ul>
+            <button onclick="flipPage('page2', 'page3')">Next</button>
+            <button onclick="flipPage('page2', 'page1')">Back</button>
+        </div>
+        <div class="page" id="page3">
+            <h1>Introduction</h1>
+            <p>Here's a little about me and my journey in child development...</p>
+            <button onclick="flipPage('page3', 'page2')">Back</button>
+        </div>
+        <!-- Add more pages as needed -->
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #e0f7fa;
+    font-family: 'Arial', sans-serif;
+}
+
+.book {
+    width: 400px;
+    height: 600px;
+    position: relative;
+    perspective: 1000px;
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border: 2px solid #00796b;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: transform 0.6s;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+#page1 {
+    z-index: 2;
+}
+
+#page2 {
+    transform: rotateY(180deg);
+}
+
+#page3 {
+    transform: rotateY(180deg);
+}
+
+.page h1, .page h2, .page h3, .page p, .page ul {
+    margin: 0;
+    padding: 10px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #00796b;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #004d40;
+}
+
+function flipPage(currentPageId, nextPageId) {
+    const currentPage = document.getElementById(currentPageId);
+    const nextPage = document.getElementById(nextPageId);
+
+    // Reset both pages to their initial state
+    currentPage.style.transform = 'rotateY(0deg)';
+    nextPage.style.transform = 'rotateY(0deg)';
+
+    // Flip the current page and show the next page
+    if (currentPageId === 'page1' && nextPageId === 'page2') {
+        currentPage.style.transform = 'rotateY(-180deg)';
+        nextPage.style.transform = 'rotateY(0deg)';
+    } else if (currentPageId === 'page2' && nextPageId === 'page3') {
+        currentPage.style.transform = 'rotateY(-180deg)';
+        nextPage.style.transform = 'rotateY(0deg)';
+    } else {
+        currentPage.style.transform = 'rotateY(0deg)';
+        nextPage.style.transform = 'rotateY(180deg)';
+    }
+}
